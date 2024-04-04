@@ -7,17 +7,17 @@ from tkinter import *
 import mysql.connector
 from tkinter import messagebox
 import sys
-from main import *
+from admin_page import Admin_App
+
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\warre\Downloads\python\build\assets\frame0")
 
 def login():
     try:
-        conn = mysql.connector.connect(host="localhost", user="root", password="", database="library")
-    except mysql.connector.Error as err:
-        messagebox.showerror("Database Error", f"Error: {err}")
-        return
+        conn = mysql.connector.connect(host="localhost", user="root", password="", database="waterbillingsystem")
+    except:
+        messagebox.showinfo("Database Error", "You are not connected to server", "Please Check your Database")
     else:
         print("Connection established successfully")
         print("Enter your username and password")
@@ -27,12 +27,11 @@ def login():
         
         cur = conn.cursor()
         
-        cur.execute("SELECT * FROM user WHERE username = %s AND password = %s", (userid, passw))
+        cur.execute("SELECT * FROM user WHERE username =%s AND password=%s", (userid, passw))
         
         myresult = cur.fetchone()
         
         print(myresult)
-        
     #checking
         
     if len(userid) == 0 and len(passw) == 0:
@@ -44,12 +43,12 @@ def login():
     else:
         if myresult:
             if myresult[3] == 1:
-                messagebox.showinfo("Login Successful", "Welcome, Admin!")
+                messagebox.showinfo("Login Succesful", "Welcome, Admin!")
                 obj.withdraw()
-                app = Library()
-
+                Admin_Appwindow = tk.Toplevel()
+                app = Admin_App(Admin_Appwindow)
             elif myresult[3] == 0:
-                messagebox.showinfo("Login Successful", "Welcome, user!")
+                messagebox.showinfo("Login Succesful", "Welcome, user!") 
             else:
                 messagebox.showinfo("Login Failed", "Invalid User!")
         else:
@@ -57,36 +56,54 @@ def login():
             
         cur.close()
         conn.close()
+        
+def adminWindow():
+    global home
+    home= Tk()
+    home.config(bg="black")
+    home.geometry('1956x1250')
+    home.title('Login')
+    Label(home, text='Admin Dashboard', font='Times 15').place(x=50, y=50)
+    
+    Button(home, text='Logout', font='Times 13', command=closew).place(x=150, y=135, width=60)
+    
+    home.mainloop()
+    
+def closew():
+    home.withdraw()
+    
+    sys.exit()
     
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
-def home():
-    # Write your home screen code here
-    pass
-
+global username_verify
+global password_verify
+global obj
 obj = Tk()
 obj.geometry("475x350")
-obj.configure(bg="LightSkyBlue")
+obj.configure(bg = "#000000")
+
+username_verify = StringVar()
+password_verify = StringVar()
 
 canvas = Canvas(
     obj,
-    bg="LightSkyBlue",
-    height=350,
-    width=475,
-    bd=0,
-    highlightthickness=0,
-    relief="ridge"
+    bg = "#000000",
+    height = 350,
+    width = 475,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
 )
 
-canvas.place(x=0, y=0)
+canvas.place(x = 0, y = 0)
 canvas.create_text(
-    40.0,
+    50.0,
     23.0,
     anchor="nw",
-    text="Library Managment System",
+    text="Water Billing System",
     fill="#FFFFFF",
-    font=("Inter Bold", 30 * -1)
+    font=("Inter Bold", 40 * -1)
 )
 
 canvas.create_text(
@@ -117,8 +134,9 @@ User = Entry(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
+    textvariable = username_verify,
     highlightthickness=0
-
+    
 )
 User.place(
     x=62.0,
@@ -139,6 +157,7 @@ Pass = Entry(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
+    textvariable = password_verify,
     highlightthickness=0
 )
 Pass.place(
