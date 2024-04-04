@@ -4,8 +4,6 @@ import os
 import sys
 from tkinter import messagebox
 
-
-
 class Bill_App:
     def __init__(self,root):
         self.root=root
@@ -59,31 +57,30 @@ class Bill_App:
         
         bill_name=Label(details,text="Bill.No.",font=("Arial Black",15),bg="#000000",fg="white").grid(row=0,column=4,padx=10)
         
-        bill_entry=Entry(details,borderwidth=10,width=40,textvariable=self.bill_no).grid(row=0,column=5,padx=8)
-        
+        bill_entry=Entry(details,borderwidth=10,width=40,textvariable=self.bill_no).grid(row=0,column=5,padx=8)        
         #=======================================snacks label frame=================================================================
-        snacks=LabelFrame(self.root,text="Snacks",font=("Arial Black",12),bg="#444444",fg="#ffffff",relief=GROOVE,bd=10)
+        snacks=LabelFrame(self.root,text="Reader",font=("Arial Black",12),bg="#444444",fg="#ffffff",relief=GROOVE,bd=10)
         snacks.place(x=0,y=160,height=528,width=1189)
         
-        item1=Label(snacks,text="Nutella Choco Spread",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=0,column=0,pady=11)
+        item1=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=0,column=0,pady=11)
         item1_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.nutella).grid(row=0,column=1,padx=10)
 
-        item2=Label(snacks,text="Noodles(1 Pack)",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=1,column=0,pady=11)
+        item2=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=1,column=0,pady=11)
         item2_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.noodles).grid(row=1,column=1,padx=10)
 
-        item3=Label(snacks,text="Lays(10Rs)",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=2,column=0,pady=11)
+        item3=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=2,column=0,pady=11)
         item3_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.lays).grid(row=2,column=1,padx=10)
 
-        item4=Label(snacks,text="Oreo(20Rs)",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=3,column=0,pady=11)
+        item4=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=3,column=0,pady=11)
         item4_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.oreo).grid(row=3,column=1,padx=10)
 
-        item5=Label(snacks,text="Chocolate Muffin",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=4,column=0,pady=11)
+        item5=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=4,column=0,pady=11)
         item5_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.muffin).grid(row=4,column=1,padx=10)
 
-        item6=Label(snacks,text="Dairy Milk Silk(60Rs)",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=5,column=0,pady=11)
+        item6=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=5,column=0,pady=11)
         item6_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.silk).grid(row=5,column=1,padx=10)
 
-        item7=Label(snacks,text="Namkeen(15Rs)",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=6,column=0,pady=11)
+        item7=Label(snacks,text="Unknown",font=("Arial Black",11),bg="#000000",fg="#ffffff").grid(row=6,column=0,pady=11)
         item7_entry=Entry(snacks,borderwidth=2,width=15,textvariable=self.namkeen).grid(row=6,column=1,padx=10)
         #===================================GROCERY=====================================================================================
        
@@ -125,11 +122,12 @@ class Bill_App:
         tax_hygine_entry=Entry(billing_menu,width=30,borderwidth=2,textvariable=self.c).grid(row=2,column=3,padx=10,pady=7)
 
         button_frame=Frame(billing_menu,bd=7,relief=GROOVE,bg="#000000")
-        button_frame.place(x=1000,width=500,height=95)
+        button_frame.place(x=900,width=600,height=95)
         
         button_total=Button(button_frame,text="Total Bill",font=("Arial Black",15),pady=10,bg="#444444",fg="#ffffff",command=lambda:total(self)).grid(row=0,column=0,padx=12)
         button_clear=Button(button_frame,text="Clear Field",font=("Arial Black",15),pady=10,bg="#444444",fg="#ffffff",command=lambda:clear(self)).grid(row=0,column=1,padx=10,pady=6)
-        button_exit=Button(button_frame,text="Exit",font=("Arial Black",15),pady=10,bg="#444444",fg="#ffffff",width=8,command=lambda:exit1(self)).grid(row=0,column=2,padx=10,pady=6)
+        button_exit=Button(button_frame,text="Panel",font=("Arial Black",15),pady=10,bg="#444444",fg="#ffffff",width=8,command=lambda:exit1(self)).grid(row=0,column=2,padx=10,pady=6)
+        button_exit=Button(button_frame,text="Sign out",font=("Arial Black",15),pady=10,bg="#444444",fg="#ffffff",width=8,command=lambda:exit1(self)).grid(row=0,column=3,padx=10,pady=6)
         intro(self)
 
 
@@ -202,13 +200,14 @@ def total(self):
     billarea(self)
 def intro(self):
     self.txtarea.delete(1.0,END)
-    self.txtarea.insert(END,"\tWELCOME TO SUPER MARKET\n\tPhone-No.739275410")
+    self.txtarea.insert(END,"\tWATERBILLING SYSTEM\n\tPhone-No.09051284130")
     self.txtarea.insert(END,f"\n\nBill no. : {self.bill_no.get()}")
     self.txtarea.insert(END,f"\nCustomer Name : {self.c_name.get()}")
     self.txtarea.insert(END,f"\nPhone No. : {self.phone.get()}")
     self.txtarea.insert(END,"\n====================================\n")
-    self.txtarea.insert(END,"\nProduct\t\tQty\tPrice\n")
+    self.txtarea.insert(END,"\nWATER READING\t\tQty\tPrice\n")
     self.txtarea.insert(END,"\n====================================\n")
+    
 def billarea(self):
     intro(self)
     if self.nutella.get()!=0:
@@ -304,6 +303,7 @@ def exit1(self):
     self.root.destroy()
             
 root=Tk()
-obj=Bill_App(root)
+obj2=Bill_App(root)
 root.mainloop()
     
+
